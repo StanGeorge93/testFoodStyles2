@@ -1,0 +1,20 @@
+version: '3'
+services:
+  server:
+    build: './server'
+    command: yarn run start
+    container_name: test_server
+    ports:
+      - "3001:3000"
+    depends_on:
+      - mongo
+    volumes:
+      - "./server:/src"
+
+  mongo:
+    image: mongo
+    container_name: test_mongo
+    volumes:
+      - './db-data:/data/db'
+    ports:
+      - "27017:27017"
